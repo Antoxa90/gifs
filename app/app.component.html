@@ -1,0 +1,44 @@
+<div id="main">
+    <label>Search gifs</label>
+    <input type="text" placeholder="Enter word" [(ngModel)]="term" (ngModelChange)="search(term)" class="form-control" />
+    <br/>
+
+    <div class="gifs">
+    	<div class="one-gif" *ngFor="let item of list">
+    		<img src="{{item.images.fixed_height_still.url}}" (click)="showInfo(item.id)" />
+    	</div>
+    </div>
+</div>
+
+
+<div id="popup" *ngIf="show">
+    <div class="row">
+        <div class="header-popup">
+        	<span class="close" (click)="close()">&#10006;</span>
+        </div>
+
+        <div class="col-md-12 col-md-offset-2 padding-container">
+            <div class="panel panel-default">
+                <div class="panel-body info-gif">
+                	<div>
+                		<img src="{{oneGif.data.images.downsized.url}}" />
+                	</div>
+
+                    <div>
+	                    <span>Import date: </span>
+	                    <span>{{oneGif.data.import_datetime | date: "dd.MM.yyyy"}}</span>
+                    </div>
+
+                    <div>
+                    	<a href="{{oneGif.data.source}}" target="_blank">Source link</a>
+                    </div>
+
+                    <div>
+                    	<span>Rating: </span>
+                    	<span>{{oneGif.data.rating}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
